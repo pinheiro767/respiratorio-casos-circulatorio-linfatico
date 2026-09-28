@@ -1,0 +1,6 @@
+
+const CACHE='atlas-integrado-v1';
+const CORE=['./','./index.html','./styles.css','./master-data.js','./app.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./sistemas/respiratorio/index.html','./sistemas/respiratorio/styles.css','./sistemas/respiratorio/data.js','./sistemas/respiratorio/app.js','./sistemas/circulatorio/index.html','./sistemas/circulatorio/style.css','./sistemas/circulatorio/app.js','./sistemas/linfatico/index.html','./sistemas/linfatico/styles.css','./sistemas/linfatico/data.js','./sistemas/linfatico/app.js'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('atlas-integrado-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{const copy=resp.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return resp}).catch(()=>e.request.mode==='navigate'?caches.match('./index.html'):undefined)))})

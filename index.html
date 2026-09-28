@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111d"><meta name="description" content="Atlas Integrado de Anatomia Humana: sistemas respiratório, circulatório e linfático.">
+<title>Atlas Integrado — Anatomia Humana</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.png"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#inicio"><span class="brandmark">A</span><span><b>Atlas Integrado</b><small>Anatomia Humana</small></span></a>
+  <nav><a href="#sistemas">Sistemas</a><a href="#roteiro">Roteiro mestre</a><a href="#busca">Busca</a></nav>
+  <div class="actions"><button id="contrastBtn" class="iconbtn" type="button" title="Alto contraste">◐</button><button id="installBtn" class="install hidden" type="button">Instalar</button></div>
+</header>
+<main>
+<section class="hero" id="inicio">
+ <div class="eyebrow">UEM • Anatomia Humana</div>
+ <h1>Três sistemas.<br><span>Um único atlas.</span></h1>
+ <p>Integra os roteiros práticos dos sistemas respiratório, circulatório e linfático, mantendo imagens, anotações, anexos, progresso e exportação de cada módulo.</p>
+ <div class="hero-actions"><a class="primary" href="#sistemas">Escolher sistema</a><button class="secondary" id="printMaster" type="button">Gerar PDF do roteiro mestre</button></div>
+ <div class="stats"><div><strong id="totalTargets">214</strong><span>alvos anatômicos</span></div><div><strong>3</strong><span>sistemas integrados</span></div><div><strong id="globalDone">0%</strong><span>progresso geral</span></div></div>
+</section>
+<section class="systems section" id="sistemas">
+ <div class="section-head"><div><span class="kicker">Módulos</span><h2>Escolha o sistema</h2></div><p>Cada módulo preserva suas ferramentas de estudo e permite retornar a este painel.</p></div>
+ <div id="systemGrid" class="system-grid"></div>
+</section>
+<section class="search-section section" id="busca">
+ <div class="section-head"><div><span class="kicker">Busca global</span><h2>Encontre qualquer estrutura</h2></div><p>Pesquise simultaneamente nos três roteiros.</p></div>
+ <div class="searchbox"><span>⌕</span><input id="globalSearch" type="search" placeholder="Ex.: carina, ducto torácico, artéria coronária…" autocomplete="off"><button id="clearSearch" type="button">Limpar</button></div>
+ <div class="filter-row" id="systemFilters"><button class="chip active" data-system="all">Todos</button><button class="chip" data-system="respiratorio">Respiratório</button><button class="chip" data-system="circulatorio">Circulatório</button><button class="chip" data-system="linfatico">Linfático</button></div>
+ <div id="searchMeta" class="search-meta">Digite para pesquisar em 214 alvos.</div>
+ <div id="searchResults" class="results"></div>
+</section>
+<section class="master section" id="roteiro">
+ <div class="section-head"><div><span class="kicker">Roteiro unificado</span><h2>Roteiro mestre</h2></div><p>Visão consolidada dos três sistemas. Use o botão acima para imprimir ou salvar em PDF.</p></div>
+ <div id="masterLists" class="master-lists"></div>
+</section>
+<section class="study-note section"><div><span class="kicker">Fluxo de estudo</span><h2>Um painel, três atlas especializados</h2><p>O painel central organiza e busca. Ao entrar em um sistema, você continua com zoom, imagens oficiais, imagens anexadas, anotações, progresso e exportação próprios daquele roteiro.</p></div></section>
+</main>
+<footer><span>Atlas Integrado de Anatomia Humana</span><span>Respiratório • Circulatório • Linfático</span></footer>
+<script src="master-data.js"></script><script src="app.js"></script>
+</body></html>
