@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176b50">
+  <meta name="description" content="Atlas PWA do Sistema Linfático — roteiro prático de Anatomia Humana com imagens, anotações, anexos e exportação para PDF.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Atlas Linfático">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Sistema Linfático — Atlas Integrado</title>
+</head>
+<body>
+<div class="integrated-shell-bar" role="navigation" aria-label="Atlas Integrado"><a href="../../index.html">← Atlas Integrado</a><span>Respiratório • Circulatório • Linfático</span></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon-192.png" alt="" aria-hidden="true">
+        <div class="brand-copy">
+          <strong>Atlas Linfático Imersivo</strong>
+          <span>Anatomia Humana • roteiro prático • órgãos, linfonodos e troncos</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="installBtn" class="soft-btn hidden" type="button" title="Instalar aplicativo"><span aria-hidden="true">⊕</span><span>Instalar</span></button>
+        <button id="backupBtn" class="soft-btn" type="button" title="Backup dos meus dados"><span aria-hidden="true">⇩</span><span>Backup</span></button>
+        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Preferências" title="Preferências">⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-panel">
+          <span class="eyebrow">Atlas PWA • funciona offline</span>
+          <h1 id="heroTitle">Sistema <span>Linfático</span></h1>
+          <p>Roteiro prático de Anatomia Humana organizado em blocos visuais: órgãos hematopoiéticos, linfonodos, baço e troncos linfáticos. Estude pelas pranchas, marque seu progresso, anexe fotos de peças anatômicas, faça anotações e gere um relatório pronto para salvar em PDF.</p>
+          <div class="hero-actions">
+            <button id="startBtn" class="primary-btn" type="button">▶ Continuar estudo</button>
+            <button id="exportBtn" class="soft-btn" type="button">▣ Gerar PDF</button>
+            <button id="resetFiltersBtn" class="soft-btn" type="button">Ver roteiro completo</button>
+          </div>
+        </div>
+        <aside class="progress-panel" aria-label="Progresso no roteiro">
+          <div class="progress-ring-wrap">
+            <div id="progressRing" class="progress-ring" style="--p:0"><strong id="progressPercent">0%</strong></div>
+            <div class="progress-copy"><strong id="progressHeadline">Comece pelo bloco 1</strong><span id="progressDetail">0 de 53 alvos revisados</span></div>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong id="targetCount">53</strong><span>alvos</span></div>
+            <div class="stat"><strong>11</strong><span>blocos</span></div>
+            <div class="stat"><strong id="attachmentCount">0</strong><span>anexos</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="toolbar" aria-label="Busca e filtros">
+        <div class="search-row">
+          <div class="searchbox">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <label class="sr-only" for="searchInput">Buscar estrutura</label>
+            <input id="searchInput" type="search" autocomplete="off" placeholder="Buscar: timo, baço, 10b, ducto torácico…">
+            <button id="clearSearch" class="clear-search hidden" type="button" aria-label="Limpar busca">×</button>
+          </div>
+          <button id="showIncompleteBtn" class="soft-btn" type="button" title="Mostrar somente estruturas ainda não marcadas">◌</button>
+        </div>
+        <div id="groupFilters" class="filters" role="group" aria-label="Filtrar por região"></div>
+      </section>
+
+      <div class="section-heading">
+        <div><h2>Roteiro anatômico</h2><p id="resultSummary">11 blocos • roteiro oficial</p></div>
+        <button id="collapseBtn" class="soft-btn" type="button">Recolher detalhes</button>
+      </div>
+
+      <section id="atlasGrid" class="atlas-grid" aria-live="polite"></section>
+      <div id="emptyState" class="empty-state hidden"><strong>Nenhuma estrutura encontrada.</strong><br>Altere a busca ou os filtros.</div>
+    </main>
+
+    <section class="section-heading" style="margin-top:34px"><div><h2>Galeria complementar</h2><p>Imagens regionais enviadas durante a construção do atlas; não alteram o roteiro oficial.</p></div></section>
+    <section id="extrasGrid" class="extra-grid" aria-label="Galeria complementar"></section>
+    <div class="source-note"><strong>Nota didática:</strong> o roteiro textual foi preservado conforme o arquivo fornecido. Alguns itens permanecem marcados como “Imagem parcial” quando as pranchas disponíveis não individualizam a estrutura de forma inequívoca.</div>
+
+    <footer class="footer">
+      <div><strong>Atlas Linfático Imersivo</strong><br>Dados de estudo, notas e imagens anexadas ficam armazenados localmente neste dispositivo.</div>
+      <div>Material didático. Antes de publicar o repositório, confirme as permissões e licenças de uso das pranchas anatômicas incluídas.</div>
+    </footer>
+  </div>
+
+  <button id="fabExport" class="fab" type="button"><span aria-hidden="true">▣</span> Gerar PDF</button>
+  <div id="offlineBadge" class="offline-badge hidden">Modo offline</div>
+
+  <div id="exportModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+    <div class="modal">
+      <div class="modal-head"><h3 id="exportTitle">Gerar relatório / PDF</h3><button class="icon-btn modal-close" type="button" aria-label="Fechar">×</button></div>
+      <div class="modal-body">
+        <p style="margin-top:0;color:var(--muted)">Monte a versão que deseja. O app cria uma página de impressão otimizada; no diálogo do navegador, escolha <strong>Salvar como PDF</strong>.</p>
+        <div class="option-grid">
+          <label class="option"><input id="pdfOfficial" type="checkbox" checked><span><strong>Imagens do atlas</strong><span>Inclui as pranchas oficiais selecionadas.</span></span></label>
+          <label class="option"><input id="pdfStudent" type="checkbox" checked><span><strong>Imagens anexadas</strong><span>Inclui fotos adicionadas pelo aluno.</span></span></label>
+          <label class="option"><input id="pdfNotes" type="checkbox" checked><span><strong>Anotações</strong><span>Inclui observações salvas em cada bloco.</span></span></label>
+          <label class="option"><input id="pdfProgress" type="checkbox" checked><span><strong>Progresso</strong><span>Mostra estruturas marcadas como estudadas.</span></span></label>
+          <label class="option"><input id="pdfOnlyDone" type="checkbox"><span><strong>Somente blocos estudados</strong><span>Omite blocos sem nenhuma marcação.</span></span></label>
+          <label class="option"><input id="pdfCompact" type="checkbox"><span><strong>Modo compacto</strong><span>Reduz imagens para economizar páginas.</span></span></label>
+        </div>
+      </div>
+      <div class="modal-actions"><button class="soft-btn modal-close" type="button">Cancelar</button><button id="generatePdfBtn" class="primary-btn" type="button">Gerar para PDF</button></div>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal">
+      <div class="modal-head"><h3 id="settingsTitle">Preferências</h3><button class="icon-btn modal-close" type="button" aria-label="Fechar">×</button></div>
+      <div class="modal-body">
+        <div class="option-grid">
+          <label class="option"><input id="largeTextToggle" type="checkbox"><span><strong>Texto ampliado</strong><span>Aumenta a leitura em telas pequenas.</span></span></label>
+          <label class="option"><input id="contrastToggle" type="checkbox"><span><strong>Alto contraste</strong><span>Aumenta contornos e contraste da interface.</span></span></label>
+          <label class="option"><input id="imagesToggle" type="checkbox"><span><strong>Ocultar imagens</strong><span>Modo roteiro: mostra apenas os nomes anatômicos.</span></span></label>
+        </div>
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+        <p style="color:var(--muted);font-size:.86rem">Os anexos ficam no armazenamento local do navegador. Use o backup antes de limpar dados, trocar de aparelho ou navegador.</p>
+        <button id="clearDataBtn" class="soft-btn" type="button" style="color:#9a2f2f">Limpar progresso, notas e anexos</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="backupModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+    <div class="modal">
+      <div class="modal-head"><h3 id="backupTitle">Backup dos dados de estudo</h3><button class="icon-btn modal-close" type="button" aria-label="Fechar">×</button></div>
+      <div class="modal-body">
+        <p style="margin-top:0;color:var(--muted)">Exporte um arquivo com progresso, notas e imagens anexadas. Depois, ele pode ser importado neste ou em outro dispositivo.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button id="exportBackupBtn" class="primary-btn" type="button">⇩ Exportar backup</button>
+          <button id="importBackupBtn" class="soft-btn" type="button">⇧ Importar backup</button>
+          <input id="importBackupInput" type="file" accept="application/json,.json" class="hidden">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+    <div class="lightbox-head"><strong id="lightboxTitle">Imagem</strong><button id="closeLightbox" class="icon-btn" type="button" aria-label="Fechar imagem">×</button></div>
+    <div class="lightbox-stage"><img id="lightboxImage" src="" alt=""></div>
+    <div class="lightbox-controls"><button id="zoomOut" type="button">−</button><button id="zoomReset" type="button">100%</button><button id="zoomIn" type="button">+</button></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

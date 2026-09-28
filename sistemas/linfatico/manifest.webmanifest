@@ -1,0 +1,26 @@
+{
+  "name": "Atlas Linfático Imersivo — Anatomia Humana",
+  "short_name": "Atlas Linfático",
+  "description": "PWA didático do Sistema Linfático: roteiro prático, imagens, anotações, anexos e PDF.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f8f5",
+  "theme_color": "#176b50",
+  "lang": "pt-BR",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
