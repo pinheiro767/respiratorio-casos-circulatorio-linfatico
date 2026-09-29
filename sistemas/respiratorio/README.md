@@ -38,3 +38,17 @@ As pranchas deste pacote foram fornecidas para composição do material didátic
 ## Atualização de conteúdo
 
 O roteiro está em `data.js`. Para trocar uma prancha sem alterar o código, substitua o arquivo correspondente em `assets/images/` pelo novo arquivo com o mesmo nome.
+
+
+## Atualização v7
+- Adicionada a aba **Pulmões (Moore)** com correção anatômica para:
+  - fissura oblíqua;
+  - fissura horizontal;
+  - lobos superior e inferior do pulmão esquerdo;
+  - lobos superior, médio e inferior do pulmão direito;
+  - língula pulmonar;
+  - ápice;
+  - face diafragmática.
+
+
+Atualização v9: cada imagem oficial do roteiro passa a exibir explicação didática com **Localização** e **Função / importância**. O recurso foi aplicado aos módulos Respiratório, Circulatório e Linfático e também aparece nos PDFs dos módulos que possuem exportação estruturada.

@@ -71,12 +71,6 @@
         <div id="groupFilters" class="filters" role="group" aria-label="Filtrar por região"></div>
       </section>
 
-      <div class="module-tabs" role="tablist" aria-label="Modos de estudo do sistema respiratório">
-        <button class="seg-btn active" type="button" data-view="roteiro" aria-selected="true">Roteiro oficial</button>
-        <button class="seg-btn" type="button" data-view="pulmoes" aria-selected="false">Pulmões (Moore)</button>
-      </div>
-
-      <div id="roteiroView">
       <div class="section-heading">
         <div><h2>Roteiro anatômico</h2><p id="resultSummary">19 blocos • 92 estruturas</p></div>
         <button id="collapseBtn" class="soft-btn" type="button">Recolher detalhes</button>
@@ -84,46 +78,6 @@
 
       <section id="atlasGrid" class="atlas-grid" aria-live="polite"></section>
       <div id="emptyState" class="empty-state hidden"><strong>Nenhuma estrutura encontrada.</strong><br>Altere a busca ou os filtros.</div>
-      </div>
-
-      <section id="mooreLungSection" class="moore-section hidden" aria-labelledby="mooreLungTitle">
-        <div class="section-heading alt">
-          <div><h2 id="mooreLungTitle">Pulmões — correção conforme Moore</h2><p>Resumo anatômico objetivo para as principais fissuras, lobos e superfícies pulmonares.</p></div>
-        </div>
-        <div class="moore-callout">
-          <strong>Ajuste segundo Moore:</strong> o pulmão esquerdo possui <strong>dois lobos</strong> (superior e inferior), separados apenas pela <strong>fissura oblíqua</strong>. A <strong>língula</strong> pertence ao <strong>lobo superior esquerdo</strong>. O pulmão direito possui <strong>três lobos</strong> (superior, médio e inferior), separados pelas <strong>fissuras horizontal e oblíqua</strong>. Em ambos, a <strong>face diafragmática</strong> corresponde à base pulmonar e o <strong>ápice</strong> projeta-se superiormente.
-        </div>
-        <div class="moore-grid">
-          <article class="moore-card">
-            <h3>Pulmão esquerdo</h3>
-            <figure class="moore-figure">
-              <img src="assets/images/pulmoes-lateral-medial.jpg" alt="Pulmões direito e esquerdo em vistas lateral e medial, com identificação dos lobos, fissuras e hilo pulmonar.">
-              <figcaption><strong>Referência visual:</strong> reconhecimento das fissuras e dos lobos pulmonares.<br><strong>Localização:</strong> cavidades pleurais direita e esquerda, lateralmente ao mediastino.<br><strong>Função / importância:</strong> os pulmões realizam as trocas gasosas; lobos e fissuras organizam o parênquima e ajudam na orientação anatômica e clínica.</figcaption>
-            </figure>
-            <div class="moore-list">
-              <div class="moore-item"><strong>Ápice:</strong> extremidade superior do pulmão esquerdo.</div>
-              <div class="moore-item"><strong>Lobo superior do pulmão esquerdo:</strong> porção superior, que inclui a língula.</div>
-              <div class="moore-item"><strong>Língula pulmonar:</strong> projeção do lobo superior esquerdo, situada anteriormente.</div>
-              <div class="moore-item"><strong>Fissura oblíqua:</strong> separa o lobo superior do lobo inferior.</div>
-              <div class="moore-item"><strong>Lobo inferior do pulmão esquerdo:</strong> porção póstero-inferior do pulmão.</div>
-              <div class="moore-item"><strong>Face diafragmática:</strong> base pulmonar, apoiada sobre o diafragma.</div>
-            </div>
-          </article>
-          <article class="moore-card">
-            <h3>Pulmão direito</h3>
-            <div class="moore-list">
-              <div class="moore-item"><strong>Ápice:</strong> extremidade superior do pulmão direito.</div>
-              <div class="moore-item"><strong>Lobo superior do pulmão direito:</strong> situado acima da fissura horizontal.</div>
-              <div class="moore-item"><strong>Fissura horizontal:</strong> separa o lobo superior do lobo médio.</div>
-              <div class="moore-item"><strong>Lobo médio do pulmão direito:</strong> lobo intermediário, entre as fissuras horizontal e oblíqua.</div>
-              <div class="moore-item"><strong>Fissura oblíqua:</strong> separa o lobo inferior dos lobos superior e médio.</div>
-              <div class="moore-item"><strong>Lobo inferior do pulmão direito:</strong> porção mais posterior e inferior.</div>
-              <div class="moore-item"><strong>Face diafragmática:</strong> base pulmonar, côncava, moldada ao diafragma.</div>
-            </div>
-            <div class="moore-note">Observação: <strong>não existe fissura horizontal no pulmão esquerdo</strong>. Esse é um ponto clássico de correção em relação ao Moore.</div>
-          </article>
-        </div>
-      </section>
     </main>
 
     <footer class="footer">

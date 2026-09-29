@@ -87,7 +87,10 @@ const ATLAS_DATA = [
     id:10, range:'46–50', group:'Nariz', title:'Drenagem da cavidade nasal', coverage:'parcial',
     images:[
       {src:'assets/images/bl10-drenagem-nasal.webp', alt:'Parede lateral da cavidade nasal com aberturas e vias de drenagem', caption:'Drenagem dos seios e abertura do ducto nasolacrimal.'},
-      {src:'assets/images/bl10-ducto-frontonasal.webp', alt:'Dissecção com sonda atravessando o ducto frontonasal e abertura do seio maxilar', caption:'Ducto frontonasal, hiato semilunar e óstio maxilar.'}
+      {src:'assets/images/bl10-ducto-frontonasal.webp', alt:'Dissecção com sonda atravessando o ducto frontonasal e abertura do seio maxilar', caption:'Ducto frontonasal, hiato semilunar e óstio maxilar.'},
+      {src:'assets/images/bl10-hiato-bolha-conchas-cadaver.webp', alt:'Dissecção sagital da cavidade nasal com concha média refletida, hiato semilunar, bolha etmoidal, concha inferior e seio frontal', caption:'Peça anatômica — hiato semilunar, bolha etmoidal e conchas nasais em relação.'},
+      {src:'assets/images/bl10-cavidade-nasal-nervos-arterias.jpg', alt:'Prancha anatômica das paredes da cavidade nasal com nervos e artérias em cortes sagitais', caption:'Cavidade nasal — nervos, artérias e relações anatômicas em cortes sagitais.'},
+      {src:'assets/images/bl10-seccao-mediana-sinus-meatos.jpg', alt:'Corte mediano da cabeça mostrando cavidade nasal, seios paranasais, hiato semilunar, ducto nasolacrimal e abertura da tuba auditiva', caption:'Corte mediano — drenagem nasal, seios paranasais e relações com a nasofaringe.'}
     ],
     items:[
       {n:46,name:'Ducto lacrimonasal',status:'parcial',note:'A prancha demonstra a abertura do ducto nasolacrimal no meato inferior; o trajeto completo pode ser complementado pelo aluno.'},
@@ -98,7 +101,8 @@ const ATLAS_DATA = [
     id:11, range:'51–55', group:'Faringe', title:'Recesso esfenoetmoidal e partes da faringe', coverage:'completo',
     images:[
       {src:'assets/images/bl11-recesso-esfenoetmoidal.webp', alt:'Corte mediano com recesso esfenoetmoidal e parte nasal da faringe', caption:'Recesso esfenoetmoidal e nasofaringe.'},
-      {src:'assets/images/bl11-faringe-partes.webp', alt:'Vista posterior da faringe com partes nasal, oral e laríngea', caption:'Faringe — partes nasal, oral e laríngea.'}
+      {src:'assets/images/bl11-faringe-partes.webp', alt:'Vista posterior da faringe com partes nasal, oral e laríngea', caption:'Faringe — partes nasal, oral e laríngea.'},
+      {src:'assets/images/bl11-tuba-toro-salpingofaringea.webp', alt:'Dissecção da nasofaringe mostrando óstio faríngeo da tuba auditiva, toro tubário, prega salpingofaríngea e recesso faríngeo', caption:'Peça anatômica — óstio da tuba auditiva, toro tubário, prega salpingofaríngea e recesso faríngeo.'}
     ],
     items:[
       {n:51,name:'Recesso esfenoetmoidal'},
@@ -110,7 +114,8 @@ const ATLAS_DATA = [
     id:12, range:'56–60', group:'Faringe', title:'Músculos da faringe', coverage:'completo',
     images:[
       {src:'assets/images/bl12-musculos-faringe.webp', alt:'Músculos da faringe em vista posterior e lateral', caption:'Constritores e estilofaríngeo.'},
-      {src:'assets/images/bl12-palatofaringeo-estilofaringeo.webp', alt:'Parede posterior da faringe com palatofaríngeo e estilofaríngeo', caption:'Palatofaríngeo e estilofaríngeo.'}
+      {src:'assets/images/bl12-palatofaringeo-estilofaringeo.webp', alt:'Parede posterior da faringe com palatofaríngeo e estilofaríngeo', caption:'Palatofaríngeo e estilofaríngeo.'},
+      {src:'assets/images/bl12-constritores-estilofaringeo-cadaver.webp', alt:'Dissecção posterior da faringe mostrando constritores superior, médio e inferior e músculo estilofaríngeo', caption:'Peça anatômica — constritores da faringe e músculo estilofaríngeo.'}
     ],
     items:[
       {n:56,name:'m. Constritor superior da faringe'},{n:57,name:'m. Constritor médio da faringe'},{n:58,name:'m. Constritor inferior da faringe'},{n:59,name:'m. Estilofaríngeo'},{n:60,name:'m. Palatofaríngeo'}
@@ -134,7 +139,8 @@ const ATLAS_DATA = [
     id:14, range:'66–70', group:'Laringe', title:'Glote, cavidade infraglótica e cartilagens', coverage:'completo',
     images:[
       {src:'assets/images/bl14-cavidade-infraglotica.webp', alt:'Corte da laringe com cavidade infraglótica e pregas vocais', caption:'Prega vocal, glote e cavidade infraglótica.'},
-      {src:'assets/images/bl14-cartilagens-laringe.webp', alt:'Prancha das cartilagens tireoidea e cricoidea com ligamentos e articulações', caption:'Cartilagens tireoidea e cricoidea — vistas lateral, posterior e superior.'}
+      {src:'assets/images/bl14-cartilagens-laringe.webp', alt:'Prancha das cartilagens tireoidea e cricoidea com ligamentos e articulações', caption:'Cartilagens tireoidea e cricoidea — vistas lateral, posterior e superior.'},
+      {src:'assets/images/bl14-tireoidea-posicao-laringe.jpg', alt:'Cartilagem tireoidea em vistas lateral e anterior e esquema da posição da laringe e do hioide no pescoço', caption:'Cartilagem tireoidea e posição da laringe/hioide no pescoço.'}
     ],
     items:[
       {n:66,name:'Prega vocal'},{n:67,name:'Glote'},{n:68,name:'Cavidade infraglótica'},
@@ -173,7 +179,8 @@ const ATLAS_DATA = [
     id:17, range:'81–85', group:'Laringe', title:'Músculos intrínsecos da laringe', coverage:'completo',
     images:[
       {src:'assets/images/bl17-musculos-intrinsecos.webp', alt:'Dissecção posterolateral da laringe com músculos intrínsecos identificados', caption:'Cricoaritenoideos, aritenoideos e tireoaritenoideo.'},
-      {src:'assets/images/bl17-musculos-laringe.webp', alt:'Prancha de músculos da laringe em vistas lateral, anterior e posterior', caption:'Músculos intrínsecos — vistas complementares.'}
+      {src:'assets/images/bl17-musculos-laringe.webp', alt:'Prancha de músculos da laringe em vistas lateral, anterior e posterior', caption:'Músculos intrínsecos — vistas complementares.'},
+      {src:'assets/images/bl17-laringe-musculos-vistas.jpg', alt:'Prancha adicional dos músculos da laringe com vistas laterais, anterior e ação dos músculos internos', caption:'Músculos da laringe — vistas laterais adicionais e ação dos músculos internos.'}
     ],
     items:[
       {n:81,name:'m. Cricoaritenoideo lateral'},{n:82,name:'m. Cricoaritenoideo posterior'},{n:83,name:'m. Aritenoideo transverso'},{n:84,name:'m. Aritenoideo oblíquo'},{n:85,name:'m. Tireoaritenoideo'}
@@ -193,7 +200,8 @@ const ATLAS_DATA = [
     id:19, range:'91–92', group:'Traqueia', title:'Carina e parede membranácea', coverage:'completo',
     images:[
       {src:'assets/images/bl18-traqueia-bifurcacao.webp', alt:'Traqueia e brônquios principais com carina', caption:'Carina da traqueia.'},
-      {src:'assets/images/bl19-parede-membranacea.webp', alt:'Vista posterior da traqueia com parede membranácea identificada', caption:'Parede membranácea da traqueia.'}
+      {src:'assets/images/bl19-parede-membranacea.webp', alt:'Vista posterior da traqueia com parede membranácea identificada', caption:'Parede membranácea da traqueia.'},
+      {src:'assets/images/pulmoes-lateral-medial.jpg', alt:'Pulmões direito e esquerdo em vistas lateral e medial, com lobos, fissuras e hilo pulmonar', caption:'Pulmões — vistas lateral e medial como complemento anatômico das relações da carina e dos brônquios principais.'}
     ],
     items:[{n:91,name:'Carina da traqueia'},{n:92,name:'Parede membranácea'}]
   }

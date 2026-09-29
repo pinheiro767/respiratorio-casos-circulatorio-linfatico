@@ -13,7 +13,6 @@
   let notes = loadJSON(STORAGE.notes, {});
   let settings = loadJSON(STORAGE.settings, {largeText:false,highContrast:false,imagesOff:false});
   let activeGroup = 'Todos';
-  let activeView = 'roteiro';
   let searchTerm = '';
   let incompleteOnly = false;
   let deferredInstall = null;
@@ -23,15 +22,13 @@
 
   const els = {
     grid: $('#atlasGrid'), empty: $('#emptyState'), search: $('#searchInput'), clearSearch: $('#clearSearch'),
-    toolbar: $('.toolbar'), roteiroView: $('#roteiroView'), mooreView: $('#mooreLungSection'),
     groupFilters: $('#groupFilters'), resultSummary: $('#resultSummary'), progressRing: $('#progressRing'),
     progressPercent: $('#progressPercent'), progressHeadline: $('#progressHeadline'), progressDetail: $('#progressDetail'),
     attachmentCount: $('#attachmentCount'), installBtn: $('#installBtn'), exportBtn: $('#exportBtn'), fabExport: $('#fabExport'),
     exportModal: $('#exportModal'), settingsModal: $('#settingsModal'), backupModal: $('#backupModal'),
     settingsBtn: $('#settingsBtn'), backupBtn: $('#backupBtn'), startBtn: $('#startBtn'), resetFiltersBtn: $('#resetFiltersBtn'),
     showIncompleteBtn: $('#showIncompleteBtn'), collapseBtn: $('#collapseBtn'), toast: $('#toast'),
-    offlineBadge: $('#offlineBadge'), lightbox: $('#lightbox'), lightboxImage: $('#lightboxImage'), lightboxTitle: $('#lightboxTitle'),
-    viewTabs: $('.seg-btn[data-view]')
+    offlineBadge: $('#offlineBadge'), lightbox: $('#lightbox'), lightboxImage: $('#lightboxImage'), lightboxTitle: $('#lightboxTitle')
   };
 
   function loadJSON(key, fallback){
@@ -123,19 +120,6 @@
     $('#imagesToggle').checked=!!settings.imagesOff;
   }
 
-  function applyView(){
-    const roteiro = activeView === 'roteiro';
-    els.toolbar?.classList.toggle('hidden', !roteiro);
-    els.roteiroView?.classList.toggle('hidden', !roteiro);
-    els.mooreView?.classList.toggle('hidden', roteiro);
-    els.fabExport?.classList.toggle('hidden', !roteiro);
-    els.viewTabs?.forEach(btn => {
-      const active = btn.dataset.view === activeView;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
-
   function blockMatches(block){
     if (activeGroup!=='Todos' && block.group!==activeGroup) return false;
     if (incompleteOnly && !block.items.some(i=>!isDone(i.n))) return false;
@@ -154,49 +138,14 @@
     return {done,total:block.items.length,pct:Math.round(done/block.items.length*100)};
   }
 
-  const RESP_IMAGE_INFO = {
-    1:{location:'Esqueleto da face, principalmente na região anterior do crânio, ao redor da abertura nasal anterior e das órbitas.',role:'Sustenta o nariz e a face, delimita a abertura nasal e participa das paredes das cavidades nasal, oral e orbitária.'},
-    2:{location:'Interior da cavidade nasal e região mediana do esqueleto facial.',role:'Forma e sustenta as paredes e o septo da cavidade nasal, separando as fossas nasais e ajudando a direcionar o fluxo de ar.'},
-    3:{location:'Parede lateral da cavidade nasal, onde as conchas delimitam os meatos superior, médio e inferior.',role:'As conchas aumentam a superfície da mucosa e promovem turbulência; os meatos recebem drenagem de seios paranasais e do ducto nasolacrimal.'},
-    4:{location:'A abertura piriforme fica anteriormente; as coanas ficam posteriormente, comunicando a cavidade nasal com a nasofaringe.',role:'Permitem a entrada e a saída do ar pela cavidade nasal e sua passagem em direção à faringe.'},
-    5:{location:'Parte superior da cavidade nasal, entre as órbitas, contribuindo para teto, septo e parede lateral.',role:'Participa da olfação, da sustentação das conchas superiores/médias e contém as células etmoidais que se comunicam com a cavidade nasal.'},
-    6:{location:'Nariz externo e raiz do nariz, sobre o esqueleto cartilaginoso e ósseo facial.',role:'As cartilagens mantêm a forma e a patência das narinas; o músculo prócero participa da expressão facial e movimenta a pele da glabela/raiz nasal.'},
-    7:{location:'Nariz externo e vestíbulo, imediatamente após as narinas.',role:'Os músculos modificam o calibre das narinas; o vestíbulo, com vibrissas, ajuda a filtrar partículas maiores do ar inspirado.'},
-    8:{location:'Mucosa da cavidade nasal; a região olfatória ocupa o teto e porções superiores, e a respiratória reveste a maior parte restante.',role:'A região olfatória detecta odores; a região respiratória aquece, umidifica e filtra o ar.'},
-    9:{location:'Seios paranasais ao redor da cavidade nasal e células etmoidais entre a cavidade nasal e as órbitas.',role:'Produzem muco, contribuem para a ressonância vocal e reduzem o peso do crânio, drenando para a cavidade nasal.'},
-    10:{location:'Parede lateral da cavidade nasal e meatos, especialmente o meato médio e o meato inferior.',role:'Conduz a drenagem dos seios paranasais e do aparelho lacrimal para a cavidade nasal.'},
-    11:{location:'Posteriormente às cavidades nasal, oral e laríngea, estendendo-se da base do crânio ao esôfago.',role:'Via comum para respiração e deglutição: conduz ar à laringe e alimento ao esôfago.'},
-    12:{location:'Parede muscular da faringe, em camadas ao redor da nasofaringe, orofaringe e laringofaringe.',role:'Os constritores propulsionam o bolo alimentar; os músculos longitudinais elevam e encurtam a faringe durante a deglutição.'},
-    13:{location:'Cavidade da laringe, entre a faringe e a traqueia, no pescoço anterior.',role:'Conduz o ar, protege a via aérea durante a deglutição e participa da fonação por meio das pregas e músculos laríngeos.'},
-    14:{location:'Esqueleto e cavidade da laringe, aproximadamente entre C3 e C6.',role:'As cartilagens mantêm a via aérea aberta; a glote e as pregas vocais regulam o fluxo aéreo e produzem som.'},
-    15:{location:'Entrada da laringe, região posterior da glote e região supra-hioidea do pescoço.',role:'A epiglote e as pregas protegem a via aérea; as aritenoides movimentam as pregas vocais; os supra-hioideos elevam hioide e laringe na deglutição.'},
-    16:{location:'Região anterior do pescoço, entre hioide, laringe e esterno; o cricotireoideo fica na face anterolateral da laringe.',role:'Os infra-hioideos estabilizam ou deprimem hioide/laringe; o cricotireoideo tensiona e alonga as pregas vocais, elevando a frequência da voz.'},
-    17:{location:'Ao redor das cartilagens cricoide, tireoide e aritenoides, nas faces posterior e lateral da laringe.',role:'Controlam a abertura e o fechamento da rima da glote e ajustam a tensão das pregas vocais durante respiração e fonação.'},
-    18:{location:'Laringe inferior e traqueia cervical/torácica, anterior ao esôfago.',role:'Os músculos refinam a fonação; as cartilagens e ligamentos traqueais mantêm a via aérea pérvia e permitem flexibilidade durante respiração e movimentos do pescoço.'},
-    19:{location:'Bifurcação da traqueia no tórax e parede posterior membranácea da traqueia.',role:'A carina direciona o fluxo para os brônquios e é muito sensível ao reflexo da tosse; a parede membranácea permite variação do diâmetro e acomodação do esôfago.'}
-  };
-
-  function getImageInfo(block, im){
-    const fallback=RESP_IMAGE_INFO[block.id]||{location:'Região anatômica demonstrada na prancha.',role:'Auxilia a reconhecer as estruturas do bloco e sua importância funcional.'};
-    return {location:im.location||fallback.location, role:im.role||fallback.role};
-  }
-
   function imageGallery(block){
     if (!block.images?.length) return '';
-    return `<div class="image-gallery" aria-label="Imagens do bloco ${block.id}">${block.images.map((im,idx)=>{
-      const info=getImageInfo(block,im);
-      return `<figure class="image-tile">
-        <div class="image-frame">
-          <img src="${im.src}" alt="${escapeHtml(im.alt)}" loading="lazy">
-          <button type="button" class="open-image" data-src="${im.src}" data-title="Bloco ${String(block.id).padStart(2,'0')} • ${escapeHtml(im.caption||block.title)}" aria-label="Ampliar imagem"></button>
-        </div>
+    return `<div class="image-gallery" aria-label="Imagens do bloco ${block.id}">${block.images.map((im,idx)=>`
+      <figure class="image-tile">
+        <img src="${im.src}" alt="${escapeHtml(im.alt)}" loading="lazy">
+        <button type="button" class="open-image" data-src="${im.src}" data-title="Bloco ${String(block.id).padStart(2,'0')} • ${escapeHtml(im.caption||block.title)}" aria-label="Ampliar imagem"></button>
         ${im.caption?`<figcaption class="image-caption">${escapeHtml(im.caption)}</figcaption>`:''}
-        <div class="image-explanation">
-          <p><strong>Localização:</strong> ${escapeHtml(info.location)}</p>
-          <p><strong>Função / importância:</strong> ${escapeHtml(info.role)}</p>
-        </div>
-      </figure>`;
-    }).join('')}</div>`;
+      </figure>`).join('')}</div>`;
   }
 
   function itemMarkup(item){
@@ -239,7 +188,6 @@
   }
 
   async function render(){
-    applyView();
     attachmentUrls.forEach(URL.revokeObjectURL); attachmentUrls=[];
     renderFilters();
     const filtered=ATLAS_DATA.filter(blockMatches);
@@ -333,7 +281,7 @@
     const done=ATLAS_DATA.reduce((a,b)=>a+b.items.filter(i=>isDone(i.n)).length,0);
     const today=new Intl.DateTimeFormat('pt-BR',{dateStyle:'long',timeStyle:'short'}).format(new Date());
     const sections=blocks.map(b=>{
-      const official=opts.official?`<div class="imgs ${opts.compact?'compact':''}">${b.images.map(im=>{const info=getImageInfo(b,im);return `<figure><img src="${new URL(im.src,location.href).href}" alt=""><figcaption><strong>${escapeHtml(im.caption||'')}</strong><br><b>Localização:</b> ${escapeHtml(info.location)}<br><b>Função / importância:</b> ${escapeHtml(info.role)}</figcaption></figure>`}).join('')}</div>`:'';
+      const official=opts.official?`<div class="imgs ${opts.compact?'compact':''}">${b.images.map(im=>`<figure><img src="${new URL(im.src,location.href).href}" alt=""><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`:'';
       const own=(opts.student&&byBlock[b.id]?.length)?`<h4>Imagens anexadas</h4><div class="imgs student ${opts.compact?'compact':''}">${byBlock[b.id].map(a=>`<figure><img src="${a.data}" alt=""><figcaption>${escapeHtml(a.name||'Imagem do aluno')}</figcaption></figure>`).join('')}</div>`:'';
       const list=b.items.map(i=>`<li class="${isDone(i.n)?'done':''}"><span class="n">${i.n}</span><div><strong>${escapeHtml(i.name)}</strong>${i.subs?.length?`<ul>${i.subs.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ul>`:''}${i.note?`<small>${escapeHtml(i.note)}</small>`:''}</div>${opts.progress?`<span class="mark">${isDone(i.n)?'✓':'○'}</span>`:''}</li>`).join('');
       const note=opts.notes&&notes[b.id]?`<div class="note"><strong>Anotações:</strong> ${escapeHtml(notes[b.id]).replace(/\n/g,'<br>')}</div>`:'';
@@ -350,8 +298,7 @@
   els.clearSearch.addEventListener('click',()=>{els.search.value='';searchTerm='';render();els.search.focus();});
   els.groupFilters.addEventListener('click',e=>{const b=e.target.closest('[data-group]');if(!b)return;activeGroup=b.dataset.group;render();});
   els.showIncompleteBtn.addEventListener('click',()=>{incompleteOnly=!incompleteOnly;render();});
-  els.resetFiltersBtn.addEventListener('click',()=>{activeGroup='Todos';searchTerm='';incompleteOnly=false;els.search.value='';activeView='roteiro';render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});});
-  els.viewTabs.forEach(btn=>btn.addEventListener('click',()=>{activeView=btn.dataset.view;applyView();if(activeView==='roteiro'){render();}else{window.scrollTo({top:0,behavior:'smooth'});}}));
+  els.resetFiltersBtn.addEventListener('click',()=>{activeGroup='Todos';searchTerm='';incompleteOnly=false;els.search.value='';render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});});
   els.startBtn.addEventListener('click',scrollToNextIncomplete);
   els.exportBtn.addEventListener('click',()=>showModal(els.exportModal)); els.fabExport.addEventListener('click',()=>showModal(els.exportModal));
   els.settingsBtn.addEventListener('click',()=>showModal(els.settingsModal)); els.backupBtn.addEventListener('click',()=>showModal(els.backupModal));
