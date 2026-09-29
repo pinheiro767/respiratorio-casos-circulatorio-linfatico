@@ -9,3 +9,12 @@ body.focus .control-shell{position:fixed;top:.6rem;left:50%;transform:translateX
 
 /* Atlas Integrado */
 .integrated-shell-bar{position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 16px;background:rgba(7,17,29,.95);color:#dcecff;border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);font:600 13px/1.2 system-ui,-apple-system,Segoe UI,sans-serif}.integrated-shell-bar a{color:#fff;text-decoration:none;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 10px;border-radius:999px}.integrated-shell-bar span{opacity:.78;text-align:right}@media(max-width:640px){.integrated-shell-bar span{display:none}}@media print{.integrated-shell-bar{display:none!important}}
+
+.image-card{display:grid;grid-template-rows:auto 1fr;border:1px solid rgba(180,207,230,.16);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.035)}
+.image-card .photo{border-radius:0;aspect-ratio:4/3}
+.image-info{padding:.65rem .7rem .75rem;background:rgba(7,17,29,.72);font-size:.73rem;line-height:1.45;color:#c8d8e6}
+.image-info p{margin:0 0 .45rem}.image-info p:last-child{margin-bottom:0}.image-info strong{color:#7ee4ff}
+@media(max-width:760px){.gallery,.user-gallery{grid-template-columns:1fr}.image-info{font-size:.78rem}}
+@media print{.image-card{background:#fff!important;border:1px solid #ddd!important}.image-info{background:#fff!important;color:#222!important;font-size:7.5pt!important}.image-info strong{color:#000!important}}
+
+.structure-info{margin:.7rem 0;padding:.75rem .85rem;border-radius:14px;background:rgba(241,247,249,.92);border:1px solid rgba(109,143,155,.2);color:#425b65;font-size:.88rem;line-height:1.45}.structure-info p{margin:.22rem 0}.structure-info strong{color:#102d38}.high-contrast .structure-info{background:#fff;border:2px solid currentColor;color:#000}
