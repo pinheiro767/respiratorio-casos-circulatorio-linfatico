@@ -56,7 +56,7 @@ function renderHome(){
  const g=globalCompletion();$('#caseDone').textContent=g.done;$('#globalPct').textContent=g.pct+'%';
  $('#sessionGrid').innerHTML=sessions.map(s=>{const p=sessionCompletion(s),visual=sessionVisual(s);return `<article class="session-card" data-num="${s.number}"><div class="session-thumb"><img src="${visual}" alt="Painel visual da aula ${s.number}" loading="lazy"><span class="session-scanline"></span></div><div class="session-card-body"><span class="tag">AULA ${s.number} • ${s.duration} MIN</span><h3>${esc(s.title)}</h3><p><b>${esc(s.subtitle)}</b><br>${esc(s.intro)}</p><div class="bar"><i style="width:${p.pct}%"></i></div><div class="meta"><span>${p.done}/${p.total} casos</span><span>${p.pct}%</span></div><button data-open-session="${s.id}" class="soft-action">${p.done?'Continuar arquivo':'Abrir arquivo'} <span aria-hidden="true">→</span></button></div></article>`}).join('');
 }
-function showOnly(id){['homeView','sessionView','caseView'].forEach(v=>$('#'+v).classList.toggle('hidden',v!==id));window.scrollTo({top:0,behavior:'smooth'})}
+function showOnly(id){['homeView','sessionView','caseView','reportView'].forEach(v=>$('#'+v).classList.toggle('hidden',v!==id));window.scrollTo({top:0,behavior:'smooth'})}
 function openSession(id){currentSession=sessions.find(s=>s.id===id);if(!currentSession)return;state.last={session:id};save();timerSec=currentSession.duration*60;stopTimer();updateTimer();$('#sessionKicker').textContent=`AULA ${currentSession.number} • ${currentSession.subtitle}`;$('#sessionTitle').textContent=currentSession.title;$('#sessionIntro').textContent=currentSession.intro;const cover=$('#sessionCoverImage');if(cover){cover.src=sessionVisual(currentSession);cover.alt=`Painel visual — ${currentSession.title}`;}renderCases();showOnly('sessionView')}
 function renderCases(){
  $('#caseGrid').innerHTML=currentSession.cases.map((c,i)=>{const p=caseCompletion(c),done=!!state.completedCases[c.id],img=c.image||sessionVisual(currentSession);return `<article class="case-card ${done?'done':''}"><div class="case-thumb"><img src="${img}" alt="Evidência visual do caso ${String(i+1).padStart(2,'0')}" loading="lazy"><span class="case-stamp">${done?'ENCERRADO':'EVIDÊNCIA'}</span></div><div class="case-card-body"><span class="case-no">CASO ${String(i+1).padStart(2,'0')} • ${c.id}</span><h3>${esc(c.title)}</h3><p>${esc(c.patient)}</p><div class="mini-progress">${p.done}/${p.total} estruturas verificadas • ${p.pct}%</div><button data-open-case="${c.id}" class="soft-action">${done?'Reabrir caso':p.done?'Continuar caso':'Iniciar caso'} <span aria-hidden="true">→</span></button></div></article>`}).join('');
@@ -75,7 +75,55 @@ function renderPhase(){
 function targetRow(t){const s=targetState(currentCase.id,currentPhase,t),label=t.system==='pulmao'?'Pulmão completo':(t.systemLabel||t.system);return `<div class="target-row ${s.done?'done':''}" data-system="${esc(t.system)}" data-code="${esc(t.code)}" data-name="${esc(t.name)}"><input class="target-check" type="checkbox" ${s.done?'checked':''} aria-label="Verificar ${esc(t.name)}"><div class="target-name"><b>${esc(t.name)}</b><span>${esc(label)} • ${esc(t.code)}</span></div><select class="status-select" aria-label="Visibilidade na peça"><option value="">Na peça...</option><option value="visivel" ${s.status==='visivel'?'selected':''}>Visível</option><option value="parcial" ${s.status==='parcial'?'selected':''}>Parcial</option><option value="nao" ${s.status==='nao'?'selected':''}>Não visível</option></select><button class="support-mini" type="button">Apoio</button></div>`}
 function findTargetFromRow(row){const system=row.dataset.system,code=row.dataset.code,name=row.dataset.name;return [...master,...pulmonary].find(t=>t.system===system&&String(t.code)===String(code)&&t.name===name)}
 function updatePhaseProgress(){const pc=phaseCompletion(currentCase,currentPhase);$('#phasePct').textContent=pc.pct+'%'}
-function completePhase(){const pc=phaseCompletion(currentCase,currentPhase);if(pc.total&&pc.done<pc.total&&!confirm(`Ainda faltam ${pc.total-pc.done} estruturas nesta etapa. Deseja avançar mesmo assim?`))return;if(currentPhase<currentCase.phases.length-1){currentPhase++;state.last={session:currentSession.id,case:currentCase.id,phase:currentPhase};save();renderPhase();window.scrollTo({top:0,behavior:'smooth'});return}state.completedCases[currentCase.id]=true;save();toast('Caso encerrado. Laudo anatômico concluído.');renderCases();renderHome();setTimeout(()=>{showOnly('sessionView')},650)}
+function completePhase(){
+ const pc=phaseCompletion(currentCase,currentPhase);
+ if(pc.total&&pc.done<pc.total&&!confirm(`Ainda faltam ${pc.total-pc.done} estruturas nesta etapa. Deseja encerrar mesmo assim?`))return;
+ if(currentPhase<currentCase.phases.length-1){
+   currentPhase++;state.last={session:currentSession.id,case:currentCase.id,phase:currentPhase};save();renderPhase();window.scrollTo({top:0,behavior:'smooth'});return;
+ }
+ state.completedCases[currentCase.id]=true;
+ state.last={session:currentSession.id,case:currentCase.id,phase:currentPhase};
+ save();renderCases();renderHome();renderReport();showOnly('reportView');toast('Caso encerrado. Laudo anatômico liberado.');
+}
+
+
+function caseAllTargets(c){
+ const rows=[];
+ c.phases.forEach((phase,phaseIdx)=>{
+   phaseTargets(c,phaseIdx).forEach(t=>rows.push({phase,phaseIdx,t,state:targetState(c.id,phaseIdx,t)}));
+ });
+ return rows;
+}
+function statusLabel(v){return v==='visivel'?'VISÍVEL':v==='parcial'?'PARCIAL':v==='nao'?'NÃO VISÍVEL':'NÃO CLASSIFICADO'}
+function renderReport(){
+ if(!currentCase||!currentSession)return;
+ const rows=caseAllTargets(currentCase), verified=rows.filter(r=>r.state.done).length;
+ const visible=rows.filter(r=>r.state.done&&r.state.status==='visivel').length;
+ const partial=rows.filter(r=>r.state.done&&r.state.status==='parcial').length;
+ const inferred=rows.filter(r=>r.state.done&&r.state.status==='nao').length;
+ const pct=rows.length?Math.round(verified/rows.length*100):0;
+ $('#reportCode').textContent=`LAUDO ANATÔMICO • ARQUIVO ${currentSession.number} • ${currentCase.id}`;
+ $('#reportTitle').textContent=currentCase.title;
+ $('#reportSummary').textContent=currentCase.patient;
+ $('#reportQuestion').textContent=currentCase.question;
+ $('#reportConclusion').textContent=`A equipe encerrou a investigação anatômica verificando ${verified} de ${rows.length} estruturas previstas. O fechamento do caso deve ser sustentado pelas relações topográficas, pelos marcos registrados e pela capacidade de indicar onde cada estrutura está — ou deveria estar — na peça.`;
+ const ri=$('#reportImage');ri.src=currentCase.image||sessionVisual(currentSession);ri.alt=`Síntese visual — ${currentCase.title}`;
+ $('#reportVerified').textContent=verified;$('#reportVisible').textContent=visible;$('#reportPartial').textContent=partial;$('#reportInferred').textContent=inferred;$('#reportPct').textContent=pct+'%';
+ $('#reportStructures').innerHTML=rows.map((r,i)=>`<div class="report-structure" data-status="${esc(r.state.status||'')}"><i>${r.state.done?'✓':'○'}</i><div><b>${esc(r.t.name)}</b><small>Etapa ${r.phaseIdx+1} • ${esc(r.phase.title)} • ${esc(r.t.code)}</small></div><em>${statusLabel(r.state.status)}</em></div>`).join('');
+ const notes=currentCase.phases.map((phase,i)=>({phase,note:state.notes[`${currentCase.id}|${i}`]||''})).filter(x=>x.note.trim());
+ $('#reportNotes').innerHTML=notes.length?notes.map(x=>`<div class="report-note"><b>${esc(x.phase.title)}</b>${esc(x.note).replace(/\n/g,'<br>')}</div>`).join(''):'<div class="report-note empty">Nenhum marco foi digitado. Antes de sair, peça à equipe que verbalize pelo menos uma relação anatômica que sustente o caso.</div>';
+ const g=globalCompletion();$('#reportGlobalFinal').classList.toggle('hidden',!(g.total>0&&g.done===g.total));
+ const idx=currentSession.cases.findIndex(c=>c.id===currentCase.id),hasNext=idx>=0&&idx<currentSession.cases.length-1;
+ $('#reportNextBtn').textContent=hasNext?'Próximo caso →':'Encerrar arquivo →';
+ $('#reportNextBtn').dataset.next=hasNext?currentSession.cases[idx+1].id:'';
+}
+function leaveReportToSession(){renderCases();showOnly('sessionView')}
+function nextFromReport(){
+ const next=$('#reportNextBtn').dataset.next;
+ if(next){openCase(next,0);return}
+ leaveReportToSession();
+}
+function printReport(){window.print()}
 
 function atlasHref(t){if(t.system==='pulmao')return '../sistemas/respiratorio/index.html';return `../sistemas/${t.system}/index.html?q=${encodeURIComponent(t.name)}`}
 function supportFor(t){
@@ -152,6 +200,7 @@ $('#targetList').addEventListener('change',e=>{const row=e.target.closest('.targ
 $('#targetList').addEventListener('click',e=>{const b=e.target.closest('.support-mini');if(!b)return;const t=findTargetFromRow(b.closest('.target-row'));if(t)openSupport(t)});
 $('#supportBtn').onclick=()=>{showSupportSearch();$('#supportDialog').showModal();setTimeout(()=>$('#supportSearch').focus(),100)};$('#supportClose').onclick=()=>$('#supportDialog').close();$('#supportSearch').addEventListener('input',e=>renderSupportResults(e.target.value));
 $('#timerToggle').onclick=()=>timerHandle?stopTimer():startTimer();$('#timerReset').onclick=()=>{stopTimer();timerSec=(currentSession?.duration||50)*60;updateTimer()};
+$('#reportBackBtn').onclick=leaveReportToSession;$('#reportNextBtn').onclick=nextFromReport;$('#reportPrintBtn').onclick=printReport;
 
 const introVideo=$('#introVideo'),videoToggle=$('#videoToggle');
 if(introVideo&&videoToggle){

@@ -108,6 +108,56 @@
 </section>
 </main>
 
+<section id="reportView" class="hidden report-view" aria-live="polite">
+  <div class="report-shell">
+    <div class="report-cinema" aria-hidden="true"><span></span><span></span><span></span></div>
+    <header class="report-hero">
+      <div class="report-stamp">CASO ENCERRADO</div>
+      <div class="report-head-copy">
+        <span id="reportCode" class="eyebrow">LAUDO ANATÔMICO</span>
+        <h1 id="reportTitle">Investigação concluída</h1>
+        <p id="reportSummary"></p>
+      </div>
+      <figure class="report-image"><img id="reportImage" src="assets/visuals/dossie.webp" alt="Imagem de síntese do caso"></figure>
+    </header>
+
+    <section class="report-stats" aria-label="Resumo do desempenho anatômico">
+      <div><strong id="reportVerified">0</strong><span>estruturas verificadas</span></div>
+      <div><strong id="reportVisible">0</strong><span>visíveis na peça</span></div>
+      <div><strong id="reportPartial">0</strong><span>parciais</span></div>
+      <div><strong id="reportInferred">0</strong><span>inferidas por marco</span></div>
+    </section>
+
+    <section class="report-grid">
+      <article class="report-card report-conclusion">
+        <span>CONCLUSÃO ANATÔMICA</span>
+        <h2 id="reportQuestion"></h2>
+        <p id="reportConclusion"></p>
+        <div id="reportGlobalFinal" class="global-final hidden">
+          <b>INVESTIGAÇÃO GERAL CONCLUÍDA</b>
+          <p>Os cinco arquivos foram encerrados. O dossiê agora integra Respiratório, Pulmão, Circulatório e Linfático em uma única revisão.</p>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-head"><span>ESTRUTURAS-CHAVE</span><b id="reportPct">0%</b></div>
+        <div id="reportStructures" class="report-structures"></div>
+      </article>
+
+      <article class="report-card report-notes-card">
+        <span>MARCOS ANATÔMICOS REGISTRADOS</span>
+        <div id="reportNotes" class="report-notes"></div>
+      </article>
+    </section>
+
+    <div class="report-actions">
+      <button id="reportBackBtn" class="secondary soft-action">← Voltar aos casos</button>
+      <button id="reportPrintBtn" class="secondary soft-action">▣ Imprimir / salvar PDF</button>
+      <button id="reportNextBtn" class="primary soft-action">Próximo caso →</button>
+    </div>
+  </div>
+</section>
+
 <dialog id="supportDialog" class="support-dialog">
   <div class="dialog-head"><div><span>APOIO ANATÔMICO</span><h2>Consulte sem sair da investigação</h2></div><button id="supportClose">×</button></div>
   <div id="supportSearchWrap" class="support-search"><input id="supportSearch" type="search" placeholder="Buscar estrutura: carina, veia marginal, ducto torácico..."></div>

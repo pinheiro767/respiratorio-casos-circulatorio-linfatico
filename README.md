@@ -85,3 +85,13 @@ Não são necessários sprites para o funcionamento da dinâmica: a identidade v
 - Botões receberam interação mais macia (hover, pressão, foco e sombras suaves).
 - Layout dos casos, alvos anatômicos, cronômetro, painel docente e apoio anatômico foi refinado para desktop, tablet e celular.
 - Cache PWA atualizado para v13 e inclui os novos materiais visuais para uso offline.
+
+
+## Atualização v14 — laudo anatômico cinematográfico
+- Ao encerrar cada caso, o aluno não volta imediatamente à lista: recebe uma tela de **CASO ENCERRADO / LAUDO ANATÔMICO**.
+- O laudo mostra número de estruturas verificadas, visíveis, parciais e não visíveis/inferidas por marcos anatômicos.
+- Lista todas as estruturas-chave do caso com o status registrado pela equipe.
+- Reúne os marcos anatômicos digitados durante as etapas.
+- Inclui botões para próximo caso, retorno ao arquivo e impressão/salvamento em PDF.
+- Quando todos os 25 casos forem concluídos, o último laudo exibe **INVESTIGAÇÃO GERAL CONCLUÍDA**.
+- Cache offline atualizado para v14.

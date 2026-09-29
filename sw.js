@@ -1,5 +1,5 @@
 
-const CACHE='atlas-integrado-v13';
+const CACHE='atlas-integrado-v14';
 const CORE=['./','./index.html','./styles.css','./master-data.js','./app.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./sistemas/respiratorio/index.html','./sistemas/respiratorio/styles.css','./sistemas/respiratorio/data.js','./sistemas/respiratorio/app.js','./sistemas/circulatorio/index.html','./sistemas/circulatorio/style.css','./sistemas/circulatorio/app.js','./sistemas/linfatico/index.html','./sistemas/linfatico/styles.css','./sistemas/linfatico/data.js','./sistemas/linfatico/app.js','./casos-clinicos/index.html','./casos-clinicos/styles.css','./casos-clinicos/support-data.js','./casos-clinicos/cases-data.js','./casos-clinicos/app.js','./casos-clinicos/assets/visuals/dossie.webp','./casos-clinicos/assets/visuals/respiratorio.webp','./casos-clinicos/assets/visuals/circulatorio.webp','./casos-clinicos/assets/visuals/linfatico.webp','./casos-clinicos/assets/visuals/abertura-investigacao.mp4'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('atlas-integrado-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
