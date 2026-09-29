@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08111e">
+<meta name="description" content="Revisão guiada por casos clínicos de Anatomia Humana: respiratório, pulmão, circulatório e linfático.">
+<title>Central de Casos Anatômicos</title>
+<link rel="icon" href="../icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="back" href="../index.html">← Atlas Integrado</a>
+  <div class="brand"><span class="signal"></span><span><b>Central de Casos Anatômicos</b><small>Revisão investigativa • Medicina</small></span></div>
+  <div class="top-actions">
+    <button id="supportBtn" class="ghost">⌕ Apoio anatômico</button>
+    <button id="teacherBtn" class="ghost" aria-pressed="false">◈ Modo docente</button>
+  </div>
+</header>
+
+<main>
+<section id="homeView" class="home-view">
+  <section class="hero immersive-hero">
+    <div class="hero-copy">
+      <div class="eyebrow">REVISÃO GUIADA • 5 AULAS</div>
+      <h1>Os prontuários chegaram.<br><span>A anatomia é a evidência.</span></h1>
+      <p>Em cada caso clínico, a equipe precisa <strong>localizar, mostrar ou dizer onde a estrutura deveria estar na peça</strong>. O app libera pistas, imagens, localização, função e acesso ao atlas quando necessário.</p>
+      <div class="hero-rule"><strong>Regra da investigação:</strong> o nome só vale depois de uma relação anatômica que sustente a resposta.</div>
+      <div class="hero-actions">
+        <button id="continueBtn" class="primary soft-action">▶ Continuar investigação</button>
+        <button id="randomBtn" class="secondary soft-action">🎲 Caso surpresa</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong id="caseDone">0</strong><span>casos concluídos</span></div>
+        <div><strong>25</strong><span>casos clínicos</span></div>
+        <div><strong id="globalPct">0%</strong><span>progresso</span></div>
+      </div>
+    </div>
+    <div class="hero-media" aria-label="Dossiê visual dos sistemas respiratório, circulatório e linfático">
+      <video id="introVideo" autoplay muted loop playsinline preload="metadata" poster="assets/visuals/dossie.webp">
+        <source src="assets/visuals/abertura-investigacao.mp4" type="video/mp4">
+      </video>
+      <div class="media-shade"></div>
+      <div class="media-label"><span>DOSSIÊ PRINCIPAL</span><strong>Respiratório • Circulatório • Linfático</strong></div>
+      <button id="videoToggle" class="video-toggle" type="button" aria-pressed="false">❚❚ Pausar cena</button>
+    </div>
+  </section>
+
+  <section class="protocol">
+    <div class="section-title"><span>PROTOCOLO</span><h2>Como cada equipe resolve um caso</h2></div>
+    <div class="protocol-grid">
+      <div><b>01</b><strong>Leia o prontuário</strong><span>Entenda a história antes de procurar nomes.</span></div>
+      <div><b>02</b><strong>Localize</strong><span>Use região, órgão e marcos anatômicos.</span></div>
+      <div><b>03</b><strong>Mostre ou indique</strong><span>Visível, parcial ou não identificável na peça.</span></div>
+      <div><b>04</b><strong>Defenda a resposta</strong><span>Diga onde fica e qual relação confirma.</span></div>
+      <div><b>05</b><strong>Feche o laudo</strong><span>Confira localização, função e atlas de apoio.</span></div>
+    </div>
+  </section>
+
+  <section class="sessions-section">
+    <div class="section-title"><span>ARQUIVOS</span><h2>Escolha a aula</h2><p>Cada arquivo foi planejado para aproximadamente 50 minutos.</p></div>
+    <div id="sessionGrid" class="session-grid"></div>
+  </section>
+</section>
+
+<section id="sessionView" class="hidden session-view">
+  <button id="backHome" class="inline-back">← Voltar aos arquivos</button>
+  <div class="session-head">
+    <div class="session-copy"><span id="sessionKicker" class="eyebrow"></span><h1 id="sessionTitle"></h1><p id="sessionIntro"></p></div>
+    <figure class="session-cover"><img id="sessionCoverImage" src="assets/visuals/dossie.webp" alt="Painel visual da aula"></figure>
+    <div class="timer-card">
+      <span>CRONÔMETRO DA AULA</span><strong id="timer">50:00</strong>
+      <div><button id="timerToggle">▶ Iniciar</button><button id="timerReset">↺</button></div>
+    </div>
+  </div>
+  <div id="caseGrid" class="case-grid"></div>
+</section>
+
+<section id="caseView" class="hidden case-view">
+  <div class="case-nav">
+    <button id="backSession" class="inline-back">← Casos da aula</button>
+    <span id="caseProgressText">Etapa 1</span>
+  </div>
+  <div class="case-layout">
+    <aside class="case-dossier">
+      <div class="dossier-top"><span id="caseCode"></span><span class="status-dot">CASO ABERTO</span></div>
+      <h1 id="caseTitle"></h1>
+      <div class="patient-box"><span>PRONTUÁRIO</span><p id="casePatient"></p></div>
+      <div class="mission-box"><span>PERGUNTA DA INVESTIGAÇÃO</span><p id="caseQuestion"></p></div>
+      <figure id="caseFigure" class="evidence-figure"><img id="caseImage" src="" alt="Evidência anatômica"><figcaption>Evidência anatômica de apoio</figcaption></figure>
+      <div class="teacher-card hidden" id="teacherCard"><span>MODO DOCENTE</span><p id="teacherText"></p></div>
+    </aside>
+
+    <section class="investigation-panel">
+      <div class="phase-head"><div><span id="phaseCount">ETAPA 1/1</span><h2 id="phaseTitle"></h2></div><div class="phase-progress"><strong id="phasePct">0%</strong><span>estruturas verificadas</span></div></div>
+      <p id="phasePrompt" class="phase-prompt"></p>
+      <div class="hint-row"><button id="hint1Btn" class="hint-btn">Pista 1</button><button id="hint2Btn" class="hint-btn">Pista 2</button><button id="atlasBtn" class="hint-btn atlas">Abrir atlas relacionado</button></div>
+      <div id="hintBox" class="hint-box hidden"></div>
+
+      <div class="instruction-box"><strong>Para cada estrutura:</strong> apontem na peça quando possível. Se não estiver identificável, escolham <b>“não visível”</b> e digam em voz alta <b>onde ela deveria estar e qual marco usariam</b>.</div>
+      <div id="targetList" class="target-list"></div>
+
+      <label class="evidence-note"><span>Marco anatômico usado pela equipe nesta etapa</span><textarea id="phaseNote" rows="3" placeholder="Ex.: localizamos primeiro a carina; a partir dela procuramos os linfonodos traqueobrônquicos inferiores..."></textarea></label>
+      <div class="phase-actions"><button id="prevPhase" class="secondary">← Etapa anterior</button><button id="completePhase" class="primary">Concluir etapa →</button></div>
+    </section>
+  </div>
+</section>
+</main>
+
+<dialog id="supportDialog" class="support-dialog">
+  <div class="dialog-head"><div><span>APOIO ANATÔMICO</span><h2>Consulte sem sair da investigação</h2></div><button id="supportClose">×</button></div>
+  <div id="supportSearchWrap" class="support-search"><input id="supportSearch" type="search" placeholder="Buscar estrutura: carina, veia marginal, ducto torácico..."></div>
+  <div id="supportResults" class="support-results"></div>
+  <div id="supportDetail" class="support-detail hidden"></div>
+</dialog>
+
+<div id="toast" class="toast"></div>
+
+<script src="../master-data.js"></script>
+<script src="support-data.js"></script>
+<script src="cases-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

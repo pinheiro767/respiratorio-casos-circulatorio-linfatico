@@ -47,3 +47,41 @@ Atualização v8: corrigida a associação das imagens regionais do sistema linf
 
 
 Atualização v9: cada imagem oficial do roteiro passa a exibir explicação didática com **Localização** e **Função / importância**. O recurso foi aplicado aos módulos Respiratório, Circulatório e Linfático e também aparece nos PDFs dos módulos que possuem exportação estruturada.
+
+
+Atualização v10: **Localização** e **Função / importância** foram adicionadas a cada estrutura/nome do roteiro nos três sistemas (Respiratório, Linfático e Circulatório), e não apenas às imagens. Os subitens do roteiro respiratório também receberam explicações quando listados.
+
+
+Atualização v11: corrigido o acesso à aba Pulmões (Moore) e incluídas Localização e Função/Importância em cada estrutura pulmonar da aba.
+
+## Atualização v12 — Central de Casos Anatômicos
+Foi acrescentado um modo de revisão guiada exclusivamente pelo PWA, em formato de investigação clínica, planejado para 5 aulas consecutivas de aproximadamente 50 minutos:
+
+1. **A via aérea deixou pistas** — cobre Respiratório 1–92.
+2. **O pulmão inteiro é a cena** — complemento pulmonar 93–157, incluindo brônquios, lobos/fissuras, pleuras, vasos, nervos e drenagem linfática.
+3. **O coração revela a rota** — cobre Circulatório 57–125.
+4. **A linfa denuncia o caminho** — cobre os 53 alvos do Sistema Linfático.
+5. **Unidade de Casos Integrados** — casos mistos dos três sistemas.
+
+### Recursos da Central de Casos
+- 25 histórias clínicas curtas, cinco por aula.
+- Etapas sequenciais com checklists anatômicos.
+- Para cada estrutura: status na peça (visível, parcial ou não visível).
+- Campo para registrar o marco anatômico usado pelo grupo.
+- Pistas graduais.
+- Apoio anatômico instantâneo com localização, função/importância, como procurar na peça e o que não confundir.
+- Link direto para o atlas do sistema correspondente.
+- Modo docente para consulta rápida durante a condução da aula.
+- Cronômetro de 50 minutos por aula.
+- Progresso salvo localmente no navegador.
+- Funcionamento offline progressivo pelo service worker da raiz.
+
+Não são necessários sprites para o funcionamento da dinâmica: a identidade visual usa prontuários, evidências, etapas e laudos em estilo de investigação clínica.
+
+## Atualização v13 — interface investigativa imersiva
+- Incluídos os quatro painéis visuais produzidos para a investigação: dossiê geral, sistema respiratório, sistema circulatório e sistema linfático corrigido.
+- Incluída a abertura em vídeo no painel inicial dos casos clínicos, com reprodução sem áudio e controle de pausa.
+- Cards das cinco aulas agora usam capas visuais próprias; cards dos casos mostram evidências anatômicas.
+- Botões receberam interação mais macia (hover, pressão, foco e sombras suaves).
+- Layout dos casos, alvos anatômicos, cronômetro, painel docente e apoio anatômico foi refinado para desktop, tablet e celular.
+- Cache PWA atualizado para v13 e inclui os novos materiais visuais para uso offline.
