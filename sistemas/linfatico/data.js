@@ -109,6 +109,11 @@ const ATLAS_DATA = [
         "src": "assets/images/visao-geral-linfatico.webp",
         "alt": "Visão geral mostrando apêndice vermiforme no sistema linfático",
         "caption": "Apêndice vermiforme — localização no sistema linfático."
+      },
+      {
+        "src": "assets/images/apendice-posicoes.jpg",
+        "alt": "Peça anatômica do ceco e apêndice vermiforme aberta, acompanhada de esquema das variações de posição do apêndice",
+        "caption": "Apêndice vermiforme — peça anatômica e principais variações topográficas (retrocecal, paracólica, retroileal, preileal e subcecal)."
       }
     ],
     "items": [
@@ -152,9 +157,19 @@ const ATLAS_DATA = [
     "coverage": "parcial",
     "images": [
       {
+        "src": "assets/images/baco-anatomia-completa.webp",
+        "alt": "Diagrama anatômico do baço com cápsula, trabéculas, polpa branca e polpa vermelha",
+        "caption": "Baço — cápsula, trabéculas e organização interna do parênquima."
+      },
+      {
         "src": "assets/images/baco-visceral.webp",
         "alt": "Baço em peça anatômica mostrando face visceral e hilo",
         "caption": "Baço — peça anatômica; apoio para sua organização macroscópica."
+      },
+      {
+        "src": "assets/images/baco-visceral-localizacao-combo.jpg",
+        "alt": "Composição com baço em face visceral e esquema da sua localização no hipocôndrio esquerdo",
+        "caption": "Baço — face visceral/hilo e localização topográfica no lado esquerdo do abdome superior."
       }
     ],
     "items": [
@@ -179,14 +194,12 @@ const ATLAS_DATA = [
       {
         "key": "II.E.1a",
         "code": "II.E.1a",
-        "name": "Baço — cápsula",
-        "status": "parcial"
+        "name": "Baço — cápsula"
       },
       {
         "key": "II.E.1b",
         "code": "II.E.1b",
-        "name": "Baço — trabéculas",
-        "status": "parcial"
+        "name": "Baço — trabéculas"
       }
     ]
   },
@@ -198,9 +211,19 @@ const ATLAS_DATA = [
     "coverage": "parcial",
     "images": [
       {
+        "src": "assets/images/baco-anatomia-completa.webp",
+        "alt": "Baço com face diafragmática e corte mostrando polpa branca e polpa vermelha",
+        "caption": "Baço — face diafragmática, polpa branca, polpa vermelha e arquitetura interna."
+      },
+      {
         "src": "assets/images/baco-visceral.webp",
         "alt": "Baço em localização anatômica e face visceral",
         "caption": "Baço — localização e face visceral."
+      },
+      {
+        "src": "assets/images/baco-in-situ-rohen.jpg",
+        "alt": "Baço in situ em vista lateral esquerda, entre as costelas, com relações com diafragma, estômago e costelas 10 a 12",
+        "caption": "Baço in situ — localização costal e relações com diafragma, pulmão, estômago e costelas 10ª–12ª."
       }
     ],
     "items": [
@@ -213,20 +236,17 @@ const ATLAS_DATA = [
       {
         "key": "II.E.2a",
         "code": "II.E.2a",
-        "name": "Polpa vermelha",
-        "status": "parcial"
+        "name": "Polpa vermelha"
       },
       {
         "key": "II.E.2b",
         "code": "II.E.2b",
-        "name": "Polpa branca",
-        "status": "parcial"
+        "name": "Polpa branca"
       },
       {
         "key": "II.E.3",
         "code": "II.E.3",
-        "name": "Face diafragmática",
-        "status": "parcial"
+        "name": "Face diafragmática"
       },
       {
         "key": "II.E.4",
@@ -243,9 +263,19 @@ const ATLAS_DATA = [
     "coverage": "parcial",
     "images": [
       {
+        "src": "assets/images/baco-anatomia-completa.webp",
+        "alt": "Baço com hilo, impressão gástrica, impressão cólica e vasos esplênicos",
+        "caption": "Baço — hilo, impressão gástrica, impressão cólica e vasos esplênicos."
+      },
+      {
         "src": "assets/images/baco-visceral.webp",
         "alt": "Face visceral do baço com hilo e vasos esplênicos",
         "caption": "Face visceral e hilo esplênico com vasos."
+      },
+      {
+        "src": "assets/images/baco-visceral-localizacao-combo.jpg",
+        "alt": "Hilo esplênico e localização do baço em esquema lateral",
+        "caption": "Complemento anatômico do hilo e da posição do baço."
       }
     ],
     "items": [
@@ -257,14 +287,12 @@ const ATLAS_DATA = [
       {
         "key": "II.E.4b",
         "code": "II.E.4b",
-        "name": "Face gástrica",
-        "status": "parcial"
+        "name": "Face gástrica"
       },
       {
         "key": "II.E.4c",
         "code": "II.E.4c",
-        "name": "Face cólica",
-        "status": "parcial"
+        "name": "Face cólica"
       },
       {
         "key": "II.E.4d",
@@ -287,6 +315,11 @@ const ATLAS_DATA = [
     "coverage": "parcial",
     "images": [
       {
+        "src": "assets/images/baco-anatomia-completa.webp",
+        "alt": "Baço em corte com artéria trabecular, arteríola central e veia esplênica",
+        "caption": "Baço — artéria trabecular, arteríola central e veia esplênica."
+      },
+      {
         "src": "assets/images/baco-visceral.webp",
         "alt": "Baço e vasos no hilo esplênico",
         "caption": "Vasos do hilo esplênico."
@@ -300,26 +333,28 @@ const ATLAS_DATA = [
         "src": "assets/images/troncos-ductos-torax.webp",
         "alt": "Esquema dos linfáticos torácicos com linfonodos intercostais",
         "caption": "Linfonodos intercostais e drenagem torácica."
+      },
+      {
+        "src": "assets/images/torax-anterior-linfaticos.jpg",
+        "alt": "Órgãos torácicos em vista anterior com vasos e linfonodos paraesternais destacados em verde",
+        "caption": "Tórax anterior — excelente apoio para localizar linfonodos paraesternais e relações mediastinais."
       }
     ],
     "items": [
       {
         "key": "II.E.6",
         "code": "II.E.6",
-        "name": "Artérias trabeculares",
-        "status": "parcial"
+        "name": "Artérias trabeculares"
       },
       {
         "key": "II.E.7",
         "code": "II.E.7",
-        "name": "Artérias centrais",
-        "status": "parcial"
+        "name": "Artérias centrais"
       },
       {
         "key": "II.E.8",
         "code": "II.E.8",
-        "name": "Veia esplênica",
-        "status": "parcial"
+        "name": "Veia esplênica"
       },
       {
         "key": "9a",
@@ -349,6 +384,11 @@ const ATLAS_DATA = [
         "src": "assets/images/torax-linfonodos-bronquicos.webp",
         "alt": "Dissecção do tórax com linfonodos relacionados à árvore brônquica",
         "caption": "Linfonodos do tórax — relações mediastinais e brônquicas."
+      },
+      {
+        "src": "assets/images/torax-anterior-linfaticos.jpg",
+        "alt": "Tórax aberto em vista anterior mostrando linfonodos paraesternais e relações com pleura e mediastino",
+        "caption": "Tórax anterior — referência útil para linfonodos frênicos superiores e mediastinais anteriores."
       }
     ],
     "items": [
@@ -452,6 +492,16 @@ const ATLAS_DATA = [
         "src": "assets/images/troncos-ductos-torax.webp",
         "alt": "Esquema de troncos e ductos linfáticos torácicos",
         "caption": "Troncos jugular, subclávio e broncomediastinal."
+      },
+      {
+        "src": "assets/images/pescoco-lateral-ansa-cervical.jpg",
+        "alt": "Região lateral do pescoço com ansa cervical, musculatura infra-hioidea, linfonodos cervicais superficiais e ducto torácico",
+        "caption": "Pescoço lateral — boa referência para troncos cervicais, ducto torácico e relações cervicais."
+      },
+      {
+        "src": "assets/images/pescoco-lateral-camada-profunda.jpg",
+        "alt": "Região lateral profunda do pescoço com esternocleidomastoideo refletido, fáscia pré-traqueal e cadeias cervicais",
+        "caption": "Pescoço lateral profundo — relações cervicais úteis para linfonodos profundos e vias de drenagem."
       }
     ],
     "items": [
@@ -511,6 +561,16 @@ const ATLAS_DATA = [
         "src": "assets/images/cervical-virchow-ducto.webp",
         "alt": "Dissecção cervical mostrando ducto torácico e linfonodo supraclavicular",
         "caption": "Terminação cervical do ducto torácico."
+      },
+      {
+        "src": "assets/images/retroperitoneal-linfaticos-ptbr.png",
+        "alt": "Dissecção toracoabdominal com identificação em português de ducto torácico, cisterna do quilo, tronco lombar, linfonodos lombares e mediastinais",
+        "caption": "Parede posterior toracoabdominal — versão adicional com rótulos em português para troncos lombares, cisterna do quilo e ducto torácico."
+      },
+      {
+        "src": "assets/images/pescoco-lateral-ansa-cervical.jpg",
+        "alt": "Pescoço lateral com ducto torácico e linfonodos cervicais",
+        "caption": "Complemento cervical para a terminação do ducto torácico e drenagem cervical."
       }
     ],
     "items": [
@@ -565,6 +625,46 @@ const EXTRA_GALLERY = [
     "src": "assets/images/mama-paraesternais.webp",
     "title": "Drenagem linfática da mama",
     "caption": "Linfonodos axilares, paraesternais e vias de drenagem da mama."
+  },
+  {
+    "src": "assets/images/canal-inguinal-masculino.jpg",
+    "title": "Região inguinal masculina",
+    "caption": "Canal inguinal e topografia regional — apoio para correlação com linfonodos inguinais superficiais."
+  },
+  {
+    "src": "assets/images/baco-in-situ-rohen.jpg",
+    "title": "Baço in situ",
+    "caption": "Correlação topográfica do baço com diafragma, pulmão e arcos costais."
+  },
+  {
+    "src": "assets/images/retroperitoneal-linfaticos-ptbr.png",
+    "title": "Retroperitônio — rótulos em português",
+    "caption": "Versão complementar da dissecção toracoabdominal com identificação em português."
+  },
+  {
+    "src": "assets/images/torax-anterior-linfaticos.jpg",
+    "title": "Tórax — linfonodos paraesternais e mediastino",
+    "caption": "Vista anterior do tórax com estruturas linfáticas em verde; útil para linfonodos paraesternais e relações mediastinais."
+  },
+  {
+    "src": "assets/images/pescoco-lateral-ansa-cervical.jpg",
+    "title": "Pescoço — linfonodos cervicais e ducto torácico",
+    "caption": "Dissecção lateral com cadeia cervical superficial, ducto torácico e relações vasculonervosas."
+  },
+  {
+    "src": "assets/images/pescoco-lateral-camada-profunda.jpg",
+    "title": "Pescoço profundo — drenagem cervical",
+    "caption": "Camada profunda do pescoço para correlação topográfica dos linfonodos cervicais profundos e vias linfáticas."
+  },
+  {
+    "src": "assets/images/baco-visceral-localizacao-combo.jpg",
+    "title": "Baço — face visceral e localização",
+    "caption": "Peça anatômica da face visceral e esquema da posição do baço no hipocôndrio esquerdo."
+  },
+  {
+    "src": "assets/images/apendice-posicoes.jpg",
+    "title": "Apêndice vermiforme — posições",
+    "caption": "Peça anatômica e variações topográficas do apêndice, órgão linfoide associado ao intestino."
   }
 ];
 

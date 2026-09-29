@@ -138,14 +138,41 @@
     return {done,total:block.items.length,pct:Math.round(done/block.items.length*100)};
   }
 
+  const LINF_IMAGE_INFO = {
+    1:{location:'A medula óssea vermelha ocupa espaços do osso esponjoso; o timo situa-se principalmente no mediastino superior e anterior, atrás do esterno.',role:'A medula vermelha realiza hematopoiese; o timo é órgão linfoide primário responsável pela maturação e seleção de linfócitos T.'},
+    2:{location:'Timo no mediastino; tonsilas ao redor da faringe; placas de Peyer na mucosa/submucosa do íleo.',role:'Organizam a resposta imune: o timo amadurece linfócitos T e as tonsilas/placas de Peyer fazem vigilância imunológica de antígenos que chegam pelas vias aerodigestivas.'},
+    3:{location:'Apêndice vermiforme ligado ao ceco no quadrante inferior direito; linfonodos distribuídos ao longo dos vasos linfáticos.',role:'O apêndice contém tecido linfoide associado ao intestino; os linfonodos filtram a linfa e promovem ativação e proliferação de células imunes.'},
+    4:{location:'Estroma localizado no interior dos linfonodos e do baço, formando cápsula, trabéculas e rede de sustentação.',role:'Fornece suporte estrutural para células imunes e organiza compartimentos onde ocorrem filtragem, apresentação de antígenos e respostas imunitárias.'},
+    5:{location:'Baço no hipocôndrio esquerdo, profundo às costelas 9ª a 11ª, entre diafragma, estômago e rim esquerdo.',role:'Filtra o sangue, remove hemácias envelhecidas, participa da resposta imune a antígenos sanguíneos e atua como reservatório celular/plaquetário.'},
+    6:{location:'Face visceral do baço, voltada para estômago, rim esquerdo, cólon e cauda do pâncreas; o hilo fica nessa face.',role:'O hilo permite entrada e saída de vasos e nervos; a artéria esplênica leva sangue ao órgão para suas funções hematológicas e imunes.'},
+    7:{location:'Vasos na região do hilo e parênquima do baço; linfonodos parietais situam-se ao longo da parede torácica e diafragma.',role:'Os vasos mantêm a perfusão e drenagem esplênica; linfonodos parietais recebem e filtram linfa da parede torácica e regiões adjacentes.'},
+    8:{location:'Linfonodos frênicos junto ao diafragma; linfonodos mediastinais anteriores na região anterior do mediastino.',role:'Drenam diafragma, pericárdio, parede torácica e estruturas mediastinais, encaminhando a linfa para cadeias e troncos maiores.'},
+    9:{location:'Ao redor da traqueia, bifurcação traqueal, brônquios principais e hilos pulmonares.',role:'Recebem linfa dos pulmões e vias aéreas, filtram partículas/antígenos e encaminham a drenagem para os troncos broncomediastinais.'},
+    10:{location:'Mediastino posterior, próximo ao esôfago e aorta, e raiz do pescoço, onde surgem troncos jugular, subclávio e broncomediastinal.',role:'Coletam linfa de estruturas torácicas posteriores, cabeça/pescoço e membro superior e a conduzem aos grandes ductos linfáticos.'},
+    11:{location:'Troncos lombares no retroperitônio; cisterna do quilo na região lombar superior; ducto torácico ascende pelo tórax até o ângulo venoso esquerdo; ducto linfático direito termina no ângulo venoso direito.',role:'Recolhem e devolvem ao sangue a linfa da maior parte do corpo; o ducto linfático direito drena o quadrante superior direito.'}
+  };
+
+  function getImageInfo(block, im){
+    const fallback=LINF_IMAGE_INFO[block.id]||{location:'Região anatômica demonstrada na prancha.',role:'Ajuda a reconhecer a estrutura linfática e seu papel na drenagem ou defesa imunológica.'};
+    return {location:im.location||fallback.location, role:im.role||fallback.role};
+  }
+
   function imageGallery(block){
     if (!block.images?.length) return '';
-    return `<div class="image-gallery" aria-label="Imagens do bloco ${block.id}">${block.images.map((im,idx)=>`
-      <figure class="image-tile">
-        <img src="${im.src}" alt="${escapeHtml(im.alt)}" loading="lazy">
-        <button type="button" class="open-image" data-src="${im.src}" data-title="Bloco ${String(block.id).padStart(2,'0')} • ${escapeHtml(im.caption||block.title)}" aria-label="Ampliar imagem"></button>
+    return `<div class="image-gallery" aria-label="Imagens do bloco ${block.id}">${block.images.map((im,idx)=>{
+      const info=getImageInfo(block,im);
+      return `<figure class="image-tile">
+        <div class="image-frame">
+          <img src="${im.src}" alt="${escapeHtml(im.alt)}" loading="lazy">
+          <button type="button" class="open-image" data-src="${im.src}" data-title="Bloco ${String(block.id).padStart(2,'0')} • ${escapeHtml(im.caption||block.title)}" aria-label="Ampliar imagem"></button>
+        </div>
         ${im.caption?`<figcaption class="image-caption">${escapeHtml(im.caption)}</figcaption>`:''}
-      </figure>`).join('')}</div>`;
+        <div class="image-explanation">
+          <p><strong>Localização:</strong> ${escapeHtml(info.location)}</p>
+          <p><strong>Função / importância:</strong> ${escapeHtml(info.role)}</p>
+        </div>
+      </figure>`;
+    }).join('')}</div>`;
   }
 
   function itemMarkup(item){
@@ -282,7 +309,7 @@
     const done=ATLAS_DATA.reduce((a,b)=>a+b.items.filter(i=>isDone(i.key)).length,0);
     const today=new Intl.DateTimeFormat('pt-BR',{dateStyle:'long',timeStyle:'short'}).format(new Date());
     const sections=blocks.map(b=>{
-      const official=opts.official?`<div class="imgs ${opts.compact?'compact':''}">${b.images.map(im=>`<figure><img src="${new URL(im.src,location.href).href}" alt=""><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`:'';
+      const official=opts.official?`<div class="imgs ${opts.compact?'compact':''}">${b.images.map(im=>{const info=getImageInfo(b,im);return `<figure><img src="${new URL(im.src,location.href).href}" alt=""><figcaption><strong>${escapeHtml(im.caption||'')}</strong><br><b>Localização:</b> ${escapeHtml(info.location)}<br><b>Função / importância:</b> ${escapeHtml(info.role)}</figcaption></figure>`}).join('')}</div>`:'';
       const own=(opts.student&&byBlock[b.id]?.length)?`<h4>Imagens anexadas</h4><div class="imgs student ${opts.compact?'compact':''}">${byBlock[b.id].map(a=>`<figure><img src="${a.data}" alt=""><figcaption>${escapeHtml(a.name||'Imagem do aluno')}</figcaption></figure>`).join('')}</div>`:'';
       const list=b.items.map(i=>`<li class="${isDone(i.key)?'done':''}"><span class="n">${escapeHtml(i.code||i.key)}</span><div><strong>${escapeHtml(i.name)}</strong>${i.subs?.length?`<ul>${i.subs.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ul>`:''}${i.note?`<small>${escapeHtml(i.note)}</small>`:''}</div>${opts.progress?`<span class="mark">${isDone(i.key)?'✓':'○'}</span>`:''}</li>`).join('');
       const note=opts.notes&&notes[b.id]?`<div class="note"><strong>Anotações:</strong> ${escapeHtml(notes[b.id]).replace(/\n/g,'<br>')}</div>`:'';

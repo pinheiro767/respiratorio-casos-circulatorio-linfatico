@@ -34,3 +34,6 @@ As pranchas foram fornecidas durante a construção do atlas. Antes de tornar o 
 ## Privacidade
 
 Progresso, notas e imagens anexadas pelo aluno permanecem localmente no navegador/dispositivo, salvo quando o próprio usuário exporta um backup ou PDF.
+
+
+Atualização v9: cada imagem oficial do roteiro passa a exibir explicação didática com **Localização** e **Função / importância**. O recurso foi aplicado aos módulos Respiratório, Circulatório e Linfático e também aparece nos PDFs dos módulos que possuem exportação estruturada.
