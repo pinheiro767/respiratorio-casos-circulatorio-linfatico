@@ -95,3 +95,11 @@ Não são necessários sprites para o funcionamento da dinâmica: a identidade v
 - Inclui botões para próximo caso, retorno ao arquivo e impressão/salvamento em PDF.
 - Quando todos os 25 casos forem concluídos, o último laudo exibe **INVESTIGAÇÃO GERAL CONCLUÍDA**.
 - Cache offline atualizado para v14.
+
+
+## Nova atividade prática 214 etiquetas
+- Simulado por estações e qualquer ordem: **simulado-pratico/index.html**.
+- Etapas independentes: identificar peça (10 pts) e selecionar relação anatômica (5 pts).
+- Etiquetas padrão: C-57 a C-125, R-1 a R-92 e L-<código alfanumérico>; numeração do roteiro permanece inalterada.
+- Gabarito docente **entregue separadamente** do pacote publicado.
+- Não usar etiquetas para estruturas ausentes, colabadas ou removidas na dissecção.
