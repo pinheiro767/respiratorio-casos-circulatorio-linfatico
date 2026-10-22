@@ -1,3 +1,10 @@
+## Atualização v16 — Simulado de 100 questões integrado
+- Na página inicial, o botão principal **SIMULADO 1–100** abre a edição original das 100 etiquetas com numeração contínua; etiquetas 1 e 2 seguem o gabarito anteriormente definido (brônquio lobar superior esquerdo e artéria coronária esquerda).
+- O simulado de 214 questões continua acessível em botão independente, cobrindo Respiratório 1–92, Circulatório 57–125 e Linfático completo.
+- O gabarito da professora **não está incluído** no pacote dos alunos.
+- Há um link “Voltar ao Atlas Integrado” dentro do simulado 100.
+- Aviso: a edição original do simulado 1–100 contém algumas estruturas que estão fora do recorte Respiratório 1–92; a revisão dos 214 é a que segue estritamente o recorte atual.
+
 # Atlas Integrado de Anatomia Humana
 
 PWA que reúne em um único pacote os roteiros de **Sistema Respiratório**, **Sistema Circulatório** e **Sistema Linfático**.
